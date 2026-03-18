@@ -1,13 +1,18 @@
 import bcrypt from 'bcrypt';
-import UserRequest, { UsersResponse } from '../schemas/users';
+import UsersRequest, { UsersResponse } from '../schemas/users';
 import type { PrismaClient, User } from '../generated/prisma/client';
 
 export interface UserService {
 
     create_user(
         prisma: PrismaClient,
-        user_request: UserRequest
+        user_request: UsersRequest
     ): Promise<UsersResponse>;
+
+    get_user_by_id(
+        prisma: PrismaClient,
+        id: number
+    ): Promise<UsersResponse | null>;
 
 }
 
@@ -20,7 +25,18 @@ export async function hashPassword(plain: string): Promise<string> {
 
 
 export const userService: UserService = {
-    async create_user(prisma: PrismaClient, user_request: UserRequest) {
+    async get_user_by_id(prisma: PrismaClient, id: number) {
+        const user = await prisma.user.findUnique({ where: { id } });
+        if (!user) return null;
+        return {
+            id: user.id,
+            full_name: user.full_name,
+            email: user.email,
+            user_name: user.user_name,
+        } as UsersResponse;
+    },
+
+    async create_user(prisma: PrismaClient, user_request: UsersRequest) {
 
         const hp = await hashPassword(user_request.password);
     

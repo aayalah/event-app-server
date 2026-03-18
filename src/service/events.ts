@@ -13,26 +13,25 @@ export const eventsService: EventsService = {
         const events = await prisma.$queryRaw<EventsResponse>`
             SELECT 
                 id,
-                source,
                 name,
                 url,
                 categories,
-                venueName,
+                "venueName",
                 ST_Distance(
                     location::geography,
                     ST_SetSRID(ST_MakePoint(${event_request.longitude}, ${event_request.latitude}), 4326)::geography
-                ) AS distance_m
-                venuePostalCode,
-                venueCountry,
-                venueStateName,
-                venueStateCode,
-                venueCityName,
-                venueAddressLine1,
-                venueAddressLine2
+                ) AS distance_m,
+                "venuePostalCode",
+                "venueCountry",
+                "venueStateName",
+                "venueStateCode",
+                "venueCityName",
+                "venueAddressLine1",
+                "venueAddressLine2"
                 FROM "Event"
                 WHERE ST_DWithin(
                     location::geography,
-                    ST_SetSRID(ST_MakePoint((${event_request.longitude}, ${event_request.latitude}), 4326)::geography,
+                    ST_SetSRID(ST_MakePoint(${event_request.longitude}, ${event_request.latitude}), 4326)::geography,
                     ${event_request.radius}
                 )
                 ORDER BY distance_m ASC
