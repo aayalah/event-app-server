@@ -4,6 +4,7 @@ interface EventsRequest {
     latitude: number;
     longitude: number;
     radius: number;
+    date?: string;
 }
 
 interface Event {
@@ -20,6 +21,7 @@ interface Event {
     venueCityName: string;
     venueAddressLine1: string;
     venueAddressLine2: string;
+    startDate?: Date;
 }
 
 export interface EventsResponse {

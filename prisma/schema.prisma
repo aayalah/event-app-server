@@ -33,4 +33,5 @@ model Event {
     venueCityName String
     venueAddressLine1 String
     venueAddressLine2 String
+    startDate DateTime?
 }

@@ -19,6 +19,7 @@ interface EventSeed {
   venueCityName: string;
   venueAddressLine1: string;
   venueAddressLine2: string;
+  startDate?: string;
 }
 
 const events: EventSeed[] = [
@@ -170,11 +171,19 @@ const events: EventSeed[] = [
 const esc = (s: string) => s.replace(/'/g, "''");
 const pgArr = (arr: string[]) => `ARRAY[${arr.map(s => `'${esc(s)}'`).join(',')}]`;
 
+const seedDates = [
+  '2026-03-15', '2026-03-17', '2026-03-19', '2026-03-21', '2026-03-22',
+  '2026-03-24', '2026-03-26', '2026-03-28', '2026-03-30', '2026-04-01',
+  '2026-04-03', '2026-04-05', '2026-04-07', '2026-04-10', '2026-04-15',
+];
+
 async function main() {
   console.log(`Seeding ${events.length} events...`);
-  for (const e of events) {
+  for (let idx = 0; idx < events.length; idx++) {
+    const e = events[idx];
+    const startDate = e.startDate ?? seedDates[idx % seedDates.length];
     await prisma.$executeRawUnsafe(`
-      INSERT INTO "Event" (source, name, url, categories, "venueName", location, "venuePostalCode", "venueCountry", "venueStateName", "venueStateCode", "venueCityName", "venueAddressLine1", "venueAddressLine2")
+      INSERT INTO "Event" (source, name, url, categories, "venueName", location, "venuePostalCode", "venueCountry", "venueStateName", "venueStateCode", "venueCityName", "venueAddressLine1", "venueAddressLine2", "startDate")
       VALUES (
         '${esc(e.source)}',
         '${esc(e.name)}',
@@ -188,7 +197,8 @@ async function main() {
         '${esc(e.venueStateCode)}',
         '${esc(e.venueCityName)}',
         '${esc(e.venueAddressLine1)}',
-        '${esc(e.venueAddressLine2)}'
+        '${esc(e.venueAddressLine2)}',
+        '${startDate}'::timestamp
       )
     `);
     process.stdout.write('.');

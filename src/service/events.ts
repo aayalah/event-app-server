@@ -1,5 +1,5 @@
 import EventsRequest, { EventsResponse } from '../schemas/events';
-import { PrismaClient, User } from '../generated/prisma/client';
+import { PrismaClient, User, Prisma } from '../generated/prisma/client';
 
 export interface EventsService {
     getEvents(
@@ -10,13 +10,18 @@ export interface EventsService {
 
 export const eventsService: EventsService = {
     async getEvents (prisma: PrismaClient, event_request: EventsRequest) {
+        const dateFilter = event_request.date
+            ? Prisma.sql`AND "startDate"::date = ${event_request.date}::date`
+            : Prisma.sql``;
+
         const events = await prisma.$queryRaw<EventsResponse>`
-            SELECT 
+            SELECT
                 id,
                 name,
                 url,
                 categories,
                 "venueName",
+                "startDate",
                 ST_Distance(
                     location::geography,
                     ST_SetSRID(ST_MakePoint(${event_request.longitude}, ${event_request.latitude}), 4326)::geography
@@ -34,6 +39,7 @@ export const eventsService: EventsService = {
                     ST_SetSRID(ST_MakePoint(${event_request.longitude}, ${event_request.latitude}), 4326)::geography,
                     ${event_request.radius}
                 )
+                ${dateFilter}
                 ORDER BY distance_m ASC
                 LIMIT 100;
         `;

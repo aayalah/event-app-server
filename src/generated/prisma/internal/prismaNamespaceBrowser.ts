@@ -93,7 +93,8 @@ export const EventScalarFieldEnum = {
   venueStateCode: 'venueStateCode',
   venueCityName: 'venueCityName',
   venueAddressLine1: 'venueAddressLine1',
-  venueAddressLine2: 'venueAddressLine2'
+  venueAddressLine2: 'venueAddressLine2',
+  startDate: 'startDate'
 } as const
 
 export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
@@ -113,4 +114,12 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
