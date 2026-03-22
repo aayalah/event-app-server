@@ -1,3 +1,6 @@
+-- Enable PostGIS extension
+CREATE EXTENSION IF NOT EXISTS postgis;
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
