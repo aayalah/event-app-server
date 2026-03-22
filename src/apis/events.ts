@@ -3,7 +3,7 @@ import { EventsService } from '../service/events';
 import type { PrismaClient } from '../generated/prisma/client';
 import EventsRequest from '../schemas/events';
 
-type EventsQuery = { lat: number; lon: number; radius: number; date?: string; };
+type EventsQuery = { lat: number; lon: number; radius: number; date?: string; category?: string; };
 
 export function createEventsRouter(eventsService: EventsService, prisma: PrismaClient) {
     const eventsRouter = Router();
@@ -17,6 +17,7 @@ export function createEventsRouter(eventsService: EventsService, prisma: PrismaC
                 longitude: Number(req.query.lon),
                 radius: Number(req.query.radius),
                 date: req.query.date,
+                category: req.query.category,
             };
             console.log(eventsRequest);
 
