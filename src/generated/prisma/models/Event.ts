@@ -46,6 +46,7 @@ export type EventMinAggregateOutputType = {
   venueCityName: string | null
   venueAddressLine1: string | null
   venueAddressLine2: string | null
+  startDate: Date | null
 }
 
 export type EventMaxAggregateOutputType = {
@@ -60,6 +61,7 @@ export type EventMaxAggregateOutputType = {
   venueCityName: string | null
   venueAddressLine1: string | null
   venueAddressLine2: string | null
+  startDate: Date | null
 }
 
 export type EventCountAggregateOutputType = {
@@ -76,6 +78,7 @@ export type EventCountAggregateOutputType = {
   venueCityName: number
   venueAddressLine1: number
   venueAddressLine2: number
+  startDate: number
   _all: number
 }
 
@@ -100,6 +103,7 @@ export type EventMinAggregateInputType = {
   venueCityName?: true
   venueAddressLine1?: true
   venueAddressLine2?: true
+  startDate?: true
 }
 
 export type EventMaxAggregateInputType = {
@@ -114,6 +118,7 @@ export type EventMaxAggregateInputType = {
   venueCityName?: true
   venueAddressLine1?: true
   venueAddressLine2?: true
+  startDate?: true
 }
 
 export type EventCountAggregateInputType = {
@@ -130,6 +135,7 @@ export type EventCountAggregateInputType = {
   venueCityName?: true
   venueAddressLine1?: true
   venueAddressLine2?: true
+  startDate?: true
   _all?: true
 }
 
@@ -233,6 +239,7 @@ export type EventGroupByOutputType = {
   venueCityName: string
   venueAddressLine1: string
   venueAddressLine2: string
+  startDate: Date | null
   _count: EventCountAggregateOutputType | null
   _avg: EventAvgAggregateOutputType | null
   _sum: EventSumAggregateOutputType | null
@@ -272,6 +279,7 @@ export type EventWhereInput = {
   venueCityName?: Prisma.StringFilter<"Event"> | string
   venueAddressLine1?: Prisma.StringFilter<"Event"> | string
   venueAddressLine2?: Prisma.StringFilter<"Event"> | string
+  startDate?: Prisma.DateTimeNullableFilter<"Event"> | Date | string | null
 }
 
 export type EventOrderByWithRelationInput = {
@@ -288,6 +296,7 @@ export type EventOrderByWithRelationInput = {
   venueCityName?: Prisma.SortOrder
   venueAddressLine1?: Prisma.SortOrder
   venueAddressLine2?: Prisma.SortOrder
+  startDate?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type EventWhereUniqueInput = Prisma.AtLeast<{
@@ -307,6 +316,7 @@ export type EventWhereUniqueInput = Prisma.AtLeast<{
   venueCityName?: Prisma.StringFilter<"Event"> | string
   venueAddressLine1?: Prisma.StringFilter<"Event"> | string
   venueAddressLine2?: Prisma.StringFilter<"Event"> | string
+  startDate?: Prisma.DateTimeNullableFilter<"Event"> | Date | string | null
 }, "id">
 
 export type EventOrderByWithAggregationInput = {
@@ -323,6 +333,7 @@ export type EventOrderByWithAggregationInput = {
   venueCityName?: Prisma.SortOrder
   venueAddressLine1?: Prisma.SortOrder
   venueAddressLine2?: Prisma.SortOrder
+  startDate?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.EventCountOrderByAggregateInput
   _avg?: Prisma.EventAvgOrderByAggregateInput
   _max?: Prisma.EventMaxOrderByAggregateInput
@@ -347,6 +358,7 @@ export type EventScalarWhereWithAggregatesInput = {
   venueCityName?: Prisma.StringWithAggregatesFilter<"Event"> | string
   venueAddressLine1?: Prisma.StringWithAggregatesFilter<"Event"> | string
   venueAddressLine2?: Prisma.StringWithAggregatesFilter<"Event"> | string
+  startDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Event"> | Date | string | null
 }
 
 export type EventUpdateInput = {
@@ -362,6 +374,7 @@ export type EventUpdateInput = {
   venueCityName?: Prisma.StringFieldUpdateOperationsInput | string
   venueAddressLine1?: Prisma.StringFieldUpdateOperationsInput | string
   venueAddressLine2?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type EventUncheckedUpdateInput = {
@@ -378,6 +391,7 @@ export type EventUncheckedUpdateInput = {
   venueCityName?: Prisma.StringFieldUpdateOperationsInput | string
   venueAddressLine1?: Prisma.StringFieldUpdateOperationsInput | string
   venueAddressLine2?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type EventUpdateManyMutationInput = {
@@ -393,6 +407,7 @@ export type EventUpdateManyMutationInput = {
   venueCityName?: Prisma.StringFieldUpdateOperationsInput | string
   venueAddressLine1?: Prisma.StringFieldUpdateOperationsInput | string
   venueAddressLine2?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type EventUncheckedUpdateManyInput = {
@@ -409,6 +424,7 @@ export type EventUncheckedUpdateManyInput = {
   venueCityName?: Prisma.StringFieldUpdateOperationsInput | string
   venueAddressLine1?: Prisma.StringFieldUpdateOperationsInput | string
   venueAddressLine2?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type StringNullableListFilter<$PrismaModel = never> = {
@@ -433,6 +449,7 @@ export type EventCountOrderByAggregateInput = {
   venueCityName?: Prisma.SortOrder
   venueAddressLine1?: Prisma.SortOrder
   venueAddressLine2?: Prisma.SortOrder
+  startDate?: Prisma.SortOrder
 }
 
 export type EventAvgOrderByAggregateInput = {
@@ -451,6 +468,7 @@ export type EventMaxOrderByAggregateInput = {
   venueCityName?: Prisma.SortOrder
   venueAddressLine1?: Prisma.SortOrder
   venueAddressLine2?: Prisma.SortOrder
+  startDate?: Prisma.SortOrder
 }
 
 export type EventMinOrderByAggregateInput = {
@@ -465,6 +483,7 @@ export type EventMinOrderByAggregateInput = {
   venueCityName?: Prisma.SortOrder
   venueAddressLine1?: Prisma.SortOrder
   venueAddressLine2?: Prisma.SortOrder
+  startDate?: Prisma.SortOrder
 }
 
 export type EventSumOrderByAggregateInput = {
@@ -479,6 +498,10 @@ export type EventUpdatecategoriesInput = {
 export type EventUpdatevenueNameInput = {
   set?: string[]
   push?: string | string[]
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 
@@ -497,6 +520,7 @@ export type EventSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   venueCityName?: boolean
   venueAddressLine1?: boolean
   venueAddressLine2?: boolean
+  startDate?: boolean
 }, ExtArgs["result"]["event"]>
 
 
@@ -514,6 +538,7 @@ export type EventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   venueCityName?: boolean
   venueAddressLine1?: boolean
   venueAddressLine2?: boolean
+  startDate?: boolean
 }, ExtArgs["result"]["event"]>
 
 export type EventSelectScalar = {
@@ -530,9 +555,10 @@ export type EventSelectScalar = {
   venueCityName?: boolean
   venueAddressLine1?: boolean
   venueAddressLine2?: boolean
+  startDate?: boolean
 }
 
-export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "source" | "name" | "url" | "categories" | "venueName" | "venuePostalCode" | "venueCountry" | "venueStateName" | "venueStateCode" | "venueCityName" | "venueAddressLine1" | "venueAddressLine2", ExtArgs["result"]["event"]>
+export type EventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "source" | "name" | "url" | "categories" | "venueName" | "venuePostalCode" | "venueCountry" | "venueStateName" | "venueStateCode" | "venueCityName" | "venueAddressLine1" | "venueAddressLine2" | "startDate", ExtArgs["result"]["event"]>
 
 export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Event"
@@ -551,6 +577,7 @@ export type $EventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     venueCityName: string
     venueAddressLine1: string
     venueAddressLine2: string
+    startDate: Date | null
   }, ExtArgs["result"]["event"]>
   composites: {}
 }
@@ -916,6 +943,7 @@ export interface EventFieldRefs {
   readonly venueCityName: Prisma.FieldRef<"Event", 'String'>
   readonly venueAddressLine1: Prisma.FieldRef<"Event", 'String'>
   readonly venueAddressLine2: Prisma.FieldRef<"Event", 'String'>
+  readonly startDate: Prisma.FieldRef<"Event", 'DateTime'>
 }
     
 
