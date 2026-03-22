@@ -14,6 +14,10 @@ export const eventsService: EventsService = {
             ? Prisma.sql`AND "startDate"::date = ${event_request.date}::date`
             : Prisma.sql``;
 
+        const categoryFilter = event_request.category
+            ? Prisma.sql`AND EXISTS (SELECT 1 FROM unnest(categories) AS cat WHERE cat ILIKE ${event_request.category})`
+            : Prisma.sql``;
+
         const events = await prisma.$queryRaw<EventsResponse>`
             SELECT
                 id,
@@ -40,6 +44,7 @@ export const eventsService: EventsService = {
                     ${event_request.radius}
                 )
                 ${dateFilter}
+                ${categoryFilter}
                 ORDER BY distance_m ASC
                 LIMIT 100;
         `;
