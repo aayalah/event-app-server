@@ -2,7 +2,7 @@ services:
   - type: web
     name: event-app-server
     env: node
-    buildCommand: yarn install && yarn build && prisma migrate deploy
+    buildCommand: corepack enable && yarn install && yarn build && prisma migrate deploy
     startCommand: yarn start
     envVars:
       - key: DATABASE_URL
