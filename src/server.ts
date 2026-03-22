@@ -16,7 +16,7 @@ const port = parseInt(process.env.PORT || '3000');
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
 const prisma = new PrismaClient({ adapter });
 
-
+app.use(express.json());
 app.use('/login', createLoginRouter(loginService, prisma));
 app.use('/events', createEventsRouter(eventsService, prisma));
 app.use('/users', createUsersRouter(userService, prisma));

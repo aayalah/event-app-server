@@ -1,6 +1,6 @@
 
 interface EventsRequest {
-    category: string;
+    category?: string;
     latitude: number;
     longitude: number;
     radius: number;
