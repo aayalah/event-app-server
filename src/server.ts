@@ -6,6 +6,7 @@ import { createLoginRouter } from './apis/login';
 import { createEventsRouter } from './apis/events';
 import { createUsersRouter } from './apis/users';
 import { createCategoriesRouter } from './apis/categories';
+import { authenticate } from './middleware/auth';
 import userService from './service/users';
 import loginService from './service/login';
 import eventsService from './service/events';
@@ -20,9 +21,9 @@ const prisma = new PrismaClient({ adapter });
 
 app.use(express.json());
 app.use('/login', createLoginRouter(loginService, prisma));
-app.use('/events', createEventsRouter(eventsService, prisma));
+app.use('/events', authenticate, createEventsRouter(eventsService, prisma));
 app.use('/users', createUsersRouter(userService, prisma));
-app.use('/categories', createCategoriesRouter(categoriesService, prisma));
+app.use('/categories', authenticate, createCategoriesRouter(categoriesService, prisma));
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

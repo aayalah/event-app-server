@@ -2,6 +2,7 @@ import { Request, Response, Router } from 'express';
 import type { PrismaClient } from '../generated/prisma/client';
 import type UserService from '../service/users';
 import type UsersRequest from '../schemas/users';
+import { authenticate } from '../middleware/auth';
 
 
 
@@ -24,7 +25,7 @@ export function createUsersRouter(userService: typeof UserService, prisma: Prism
 
     });
 
-    usersRouter.get('/:id', async (req: Request, res: Response) => {
+    usersRouter.get('/:id', authenticate, async (req: Request, res: Response) => {
         try {
             const idParam = req.params.id;
             if (Array.isArray(idParam)) {
@@ -33,9 +34,14 @@ export function createUsersRouter(userService: typeof UserService, prisma: Prism
             }
 
             const id = Number.parseInt(idParam, 10);
-            
+
             if (Number.isNaN(id)) {
                 res.status(400).json({ error: 'Invalid id' });
+                return;
+            }
+
+            if (req.user!.id !== id) {
+                res.status(403).json({ error: 'Forbidden' });
                 return;
             }
 

@@ -39,3 +39,8 @@ npm start            # Run production server from compiled dist/server.js
 - The codebase uses Express 5.x which has breaking changes from v4 (native async/await support, updated error handling)
 - No git repository is currently initialized
 - No database, middleware, or additional route structure is present yet
+
+## Git Workflow
+- Use Conventional Commits (e.g., feat:, fix:)
+- Always create a new branch for changes
+- Summarize PRs with "Impact," "Changes," and "Testing" sections
