@@ -22,6 +22,7 @@ export const loginService: LoginService = {
         const isValid = await verifyPassword(login_request.password, user.password_hash);
         if(isValid){
             return {
+                id: user.id,
                 email: user.email,
                 user_name: user.user_name,
                 full_name: user.full_name,
