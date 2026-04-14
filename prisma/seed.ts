@@ -177,6 +177,19 @@ const seedDates = [
   '2026-04-03', '2026-04-05', '2026-04-07', '2026-04-10', '2026-04-15',
 ];
 
+const groups = [
+  { name: 'NYC Music Lovers', description: 'A group for music fans in New York City', categories: ['Music', 'Pop', 'Jazz'], city: 'New York', country: 'US' },
+  { name: 'LA Sports Club', description: 'Sports enthusiasts in Los Angeles', categories: ['Sports', 'Basketball', 'Baseball'], city: 'Los Angeles', country: 'US' },
+  { name: 'Chicago Food & Culture', description: 'Exploring food and culture in Chicago', categories: ['Food', 'Culture', 'Festival'], city: 'Chicago', country: 'US' },
+  { name: 'Austin Tech & Music', description: 'Tech professionals who love live music in Austin', categories: ['Technology', 'Music', 'Festival'], city: 'Austin', country: 'US' },
+  { name: 'Seattle Outdoor & Arts', description: 'Outdoor events and arts scene in Seattle', categories: ['Art', 'Culture', 'Music'], city: 'Seattle', country: 'US' },
+  { name: 'Miami Nightlife Crew', description: 'EDM and nightlife enthusiasts in Miami', categories: ['Music', 'EDM', 'Culture'], city: 'Miami', country: 'US' },
+  { name: 'Denver Adventure Squad', description: 'Concert-goers and sports fans in Denver', categories: ['Music', 'Sports', 'Concert'], city: 'Denver', country: 'US' },
+  { name: 'Nashville Country Circle', description: 'Country music and food festival fans in Nashville', categories: ['Music', 'Country', 'Food'], city: 'Nashville', country: 'US' },
+  { name: 'Boston Sports & Comedy', description: 'Sports and comedy fans around Boston', categories: ['Sports', 'Comedy', 'Basketball'], city: 'Boston', country: 'US' },
+  { name: 'SF Bay Area Tech Events', description: 'Technology conferences and innovation events in San Francisco', categories: ['Technology', 'Conference', 'Business'], city: 'San Francisco', country: 'US' },
+];
+
 async function main() {
   console.log(`Seeding ${events.length} events...`);
   for (let idx = 0; idx < events.length; idx++) {
@@ -204,6 +217,17 @@ async function main() {
     process.stdout.write('.');
   }
   console.log(`\nDone. Inserted ${events.length} events.`);
+
+  console.log(`Seeding ${groups.length} groups...`);
+  for (const g of groups) {
+    await prisma.group.upsert({
+      where: { name: g.name },
+      update: {},
+      create: g,
+    });
+    process.stdout.write('.');
+  }
+  console.log(`\nDone. Inserted ${groups.length} groups.`);
 }
 
 main()
