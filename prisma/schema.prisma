@@ -10,6 +10,7 @@ model User {
     email String @unique @db.VarChar(30)
     user_name String @db.VarChar(30)
     password_hash String @db.VarChar(100)
+    groups Group[]
 }
 
 generator client {
@@ -34,4 +35,17 @@ model Event {
     venueAddressLine1 String
     venueAddressLine2 String
     startDate DateTime?
+}
+
+
+model Group {
+    id Int @id @default(autoincrement())
+    name String @unique @db.VarChar(50)
+    description String? @db.VarChar(255)
+    categories String[]
+    city String @db.VarChar(50)
+    country String @db.VarChar(50)
+    users User[]
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }

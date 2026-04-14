@@ -6,11 +6,14 @@ import { createLoginRouter } from './apis/login';
 import { createEventsRouter } from './apis/events';
 import { createUsersRouter } from './apis/users';
 import { createCategoriesRouter } from './apis/categories';
+import { createGroupsRouter } from './apis/groups';
 import { authenticate } from './middleware/auth';
 import userService from './service/users';
 import loginService from './service/login';
 import eventsService from './service/events';
 import categoriesService from './service/categories';
+import groupsService from './service/groups';
+
 dotenv.config();
 
 const app: Application = express();
@@ -24,6 +27,7 @@ app.use('/login', createLoginRouter(loginService, prisma));
 app.use('/events', authenticate, createEventsRouter(eventsService, prisma));
 app.use('/users', createUsersRouter(userService, prisma));
 app.use('/categories', authenticate, createCategoriesRouter(categoriesService, prisma));
+app.use('/groups', createGroupsRouter(groupsService, prisma));
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

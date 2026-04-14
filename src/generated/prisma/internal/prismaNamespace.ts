@@ -391,7 +391,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
-  Event: 'Event'
+  Event: 'Event',
+  Group: 'Group'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -407,7 +408,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "event"
+    modelProps: "user" | "event" | "group"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -543,6 +544,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Group: {
+      payload: Prisma.$GroupPayload<ExtArgs>
+      fields: Prisma.GroupFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GroupFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GroupFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>
+        }
+        findFirst: {
+          args: Prisma.GroupFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GroupFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>
+        }
+        findMany: {
+          args: Prisma.GroupFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>[]
+        }
+        create: {
+          args: Prisma.GroupCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>
+        }
+        createMany: {
+          args: Prisma.GroupCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GroupCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>[]
+        }
+        delete: {
+          args: Prisma.GroupDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>
+        }
+        update: {
+          args: Prisma.GroupUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>
+        }
+        deleteMany: {
+          args: Prisma.GroupDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GroupUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GroupUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>[]
+        }
+        upsert: {
+          args: Prisma.GroupUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GroupPayload>
+        }
+        aggregate: {
+          args: Prisma.GroupAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGroup>
+        }
+        groupBy: {
+          args: Prisma.GroupGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GroupGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GroupCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GroupCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -611,6 +686,20 @@ export const EventScalarFieldEnum = {
 } as const
 
 export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+export const GroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  categories: 'categories',
+  city: 'city',
+  country: 'country',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GroupScalarFieldEnum = (typeof GroupScalarFieldEnum)[keyof typeof GroupScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -787,6 +876,7 @@ export interface PrismaClientOptions {
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   event?: Prisma.EventOmit
+  group?: Prisma.GroupOmit
 }
 
 /* Types for Logging */

@@ -1,7 +1,6 @@
 import { Request, Response, Router } from 'express';
 import jwt from 'jsonwebtoken';
 import LoginRequest from '../schemas/login';
-import { loginService } from '../service/login';
 import type { LoginService } from '../service/login';
 import type { PrismaClient } from '../generated/prisma/client';
 
@@ -26,8 +25,7 @@ export function createLoginRouter(loginService: LoginService, prisma: PrismaClie
 
             res.status(200).json({ token, user });
         } catch (err) {
-            console.error(err);
-            res.status(500).json({ error: 'Failed to login' });
+            res.status(500).json({ error: `Failed to login: ${err}` });
         }
 
     });
