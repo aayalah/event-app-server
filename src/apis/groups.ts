@@ -18,9 +18,9 @@ export function createGroupsRouter(groupsService: GroupsService, prisma: PrismaC
             };
 
             const result = await groupsService.getGroups(prisma, groupsRequest);
-            res.status(201).json(result);
+            res.status(200).json(result);
         } catch (err) {
-            res.status(500).json({error: 'Failed to login'});
+            res.status(500).json({error: 'Failed to fetch groups'});
         }
 
     });

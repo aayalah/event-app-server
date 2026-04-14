@@ -253,10 +253,10 @@ export type GroupOrderByWithRelationInput = {
 
 export type GroupWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  name?: string
   AND?: Prisma.GroupWhereInput | Prisma.GroupWhereInput[]
   OR?: Prisma.GroupWhereInput[]
   NOT?: Prisma.GroupWhereInput | Prisma.GroupWhereInput[]
+  name?: Prisma.StringFilter<"Group"> | string
   description?: Prisma.StringNullableFilter<"Group"> | string | null
   categories?: Prisma.StringNullableListFilter<"Group">
   city?: Prisma.StringFilter<"Group"> | string
@@ -264,7 +264,7 @@ export type GroupWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Group"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Group"> | Date | string
   users?: Prisma.UserListRelationFilter
-}, "id" | "name">
+}, "id">
 
 export type GroupOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

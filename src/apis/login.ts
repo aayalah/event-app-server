@@ -25,7 +25,8 @@ export function createLoginRouter(loginService: LoginService, prisma: PrismaClie
 
             res.status(200).json({ token, user });
         } catch (err) {
-            res.status(500).json({ error: `Failed to login: ${err}` });
+            console.error(err);
+            res.status(500).json({ error: `Failed to login` });
         }
 
     });
