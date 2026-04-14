@@ -24,8 +24,6 @@ interface Event {
     startDate?: Date;
 }
 
-export interface EventsResponse {
-    events: Event[];
-}
+export type EventsResponse = Event[];
 
 export default EventsRequest;
