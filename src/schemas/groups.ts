@@ -16,8 +16,6 @@ interface Group {
     updatedAt: Date;
 }
 
-export interface GroupsResponse {
-    groups: Group[];
-}
+export type GroupsResponse = Group[];
 
 export default GroupsRequest;

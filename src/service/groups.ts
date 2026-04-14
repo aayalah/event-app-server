@@ -23,7 +23,7 @@ export const groupsService: GroupsService = {
             orderBy: {name: 'asc'},
         })
 
-        return { groups };
+        return groups;
     }
 };
 
