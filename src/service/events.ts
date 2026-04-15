@@ -1,15 +1,22 @@
 import EventsRequest, { EventsResponse } from '../schemas/events';
 import { PrismaClient, User, Prisma } from '../generated/prisma/client';
 
+export interface EventsPrismaPort {
+    $queryRaw<T = unknown>(
+      query: TemplateStringsArray | Prisma.Sql,
+      ...values: unknown[]
+    ): Promise<T>;
+  }
+
 export interface EventsService {
     getEvents(
-        prisma: PrismaClient,
+        prisma: EventsPrismaPort,
         events_request: EventsRequest,
     ): Promise<EventsResponse>;
 }
 
 export const eventsService: EventsService = {
-    async getEvents (prisma: PrismaClient, event_request: EventsRequest) {
+    async getEvents (prisma: EventsPrismaPort, event_request: EventsRequest) {
         const dateFilter = event_request.date
             ? Prisma.sql`AND "startDate"::date = ${event_request.date}::date`
             : Prisma.sql``;

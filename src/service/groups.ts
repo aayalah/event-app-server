@@ -1,15 +1,33 @@
 import GroupsRequest, { GroupsResponse } from '../schemas/groups';
-import { PrismaClient } from '../generated/prisma/client';
+import { Prisma } from '../generated/prisma/client';
+
+
+export interface GroupPrismaPort {
+    group: {
+      findMany(args:{
+        where: {
+            categories?: { has: string; };
+            city: { equals: string; mode: Prisma.QueryMode; };
+            country: { equals: string; mode: Prisma.QueryMode; };
+        };
+        orderBy: {
+            name: "asc";
+        };
+      }): Promise<GroupsResponse>;
+    };
+}
+
+
 
 export interface GroupsService {
     getGroups(
-        prisma: PrismaClient,
+        prisma: GroupPrismaPort,
         group_request: GroupsRequest,
     ): Promise<GroupsResponse>;
 }
 
 export const groupsService: GroupsService = {
-    async getGroups (prisma: PrismaClient, group_request: GroupsRequest) {
+    async getGroups (prisma: GroupPrismaPort, group_request: GroupsRequest) {
 
         const groups = await prisma.group.findMany({
             where: {

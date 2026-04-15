@@ -2,10 +2,21 @@ import bcrypt from 'bcrypt';
 import LoginRequest, { LoginResponse } from '../schemas/login';
 import { PrismaClient, User } from '../generated/prisma/client';
 
+
+
+export interface LoginPrismaPort {
+    user: {
+      findUnique(args: {
+        where: { email: string };
+      }): Promise<User | null>;
+    };
+  }
+
+
 export interface LoginService {
 
     login(
-        prisma: PrismaClient,
+        prisma: LoginPrismaPort,
         login_request: LoginRequest,
     ): Promise<LoginResponse>;
 
@@ -13,7 +24,7 @@ export interface LoginService {
 
 
 export const loginService: LoginService = {
-    async login(prisma: PrismaClient, login_request: LoginRequest) {
+    async login(prisma: LoginPrismaPort, login_request: LoginRequest) {
         const user = await prisma.user.findUnique({ where: { email: login_request.email } });
         if (!user) {
             throw new Error('User not found');
