@@ -27,7 +27,7 @@ jobs:
 
             execSync(`git fetch origin ${context.payload.pull_request.base.ref}`);
             const diff = execSync(
-              `git diff origin/${context.payload.pull_request.base.ref}...HEAD`
+              `git diff origin/${context.payload.pull_request.base.ref}...HEAD -- . ':(exclude)package-lock.json'` 
             ).toString();
 
             const prTitle = context.payload.pull_request.title;
@@ -54,7 +54,7 @@ jobs:
                       `PR Description: ${prBody}\n`,
                       'Diff:',
                       '```',
-                      diff.slice(0, 50000),
+                      diff.slice(0, 200000),
                       '```\n',
                       'Provide your review in this format:',
                       '## Claude Code Review\n',

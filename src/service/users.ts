@@ -1,16 +1,23 @@
 import bcrypt from 'bcrypt';
 import UsersRequest, { UsersResponse } from '../schemas/users';
-import type { PrismaClient, User } from '../generated/prisma/client';
+import type { User } from '../generated/prisma/client';
+
+export interface UsersPrismaClient {
+    user: {
+        findUnique(args: { where: { id: number } }): Promise<User | null>;
+        create(args: { data: { full_name: string; email: string; user_name: string; password_hash: string } }): Promise<User>;
+    };
+}
 
 export interface UserService {
 
     create_user(
-        prisma: PrismaClient,
+        prisma: UsersPrismaClient,
         user_request: UsersRequest
     ): Promise<UsersResponse>;
 
     get_user_by_id(
-        prisma: PrismaClient,
+        prisma: UsersPrismaClient,
         id: number
     ): Promise<UsersResponse | null>;
 
@@ -25,7 +32,7 @@ export async function hashPassword(plain: string): Promise<string> {
 
 
 export const userService: UserService = {
-    async get_user_by_id(prisma: PrismaClient, id: number) {
+    async get_user_by_id(prisma: UsersPrismaClient, id: number) {
         const user = await prisma.user.findUnique({ where: { id } });
         if (!user) return null;
         return {
@@ -36,7 +43,7 @@ export const userService: UserService = {
         } as UsersResponse;
     },
 
-    async create_user(prisma: PrismaClient, user_request: UsersRequest) {
+    async create_user(prisma: UsersPrismaClient, user_request: UsersRequest) {
 
         const hp = await hashPassword(user_request.password);
     
