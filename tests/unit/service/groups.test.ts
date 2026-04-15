@@ -48,4 +48,26 @@ describe("groupsService.getGroups", () => {
             groupMock2
         ]);
     });
+
+    it("returns groups, no category in request", async () =>  {
+        const prismaMock = {
+            group: {
+                findMany: vi.fn().mockResolvedValue([
+                    groupMock1,
+                    groupMock2,
+                ]),
+            },
+        };
+
+        const groupsRequest: GroupsRequest = {
+            city: "SF",
+            country: "US",
+        }
+
+        const result = await groupsService.getGroups(prismaMock, groupsRequest);
+        expect(result).toEqual([
+            groupMock1,
+            groupMock2
+        ]);
+    });
 }); 
